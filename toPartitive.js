@@ -50,38 +50,11 @@ String.prototype.toPartitive = function(){
         return nominative.substr(0, nominative.length-1) + ('ea').harmoniseVowels(nominative); // e.g. suomi -> suomea
       }
     }else{
-      return 'TODO #1!';
-    }
+		throw 'Functionality not implemented yet.';
+	}
   }else if(!lastLetterIsAVowel){
     return nominative + ('ta').harmoniseVowels(lastLetter); // e.g. poikkeus -> poikkeusta
   }else{
-    return "CANNOT TURN ''"+this.toString()+"'' TO PARTITIVE.";
+    throw "Cannot turn ''"+this.toString()+"'' into a partitive.";
   }
 }
-
-
-/*
-
-maa	maata
-
-
-j behaves like vowels:
-
-
-partitive declination
-NOMIMATIVE	PARTITIVE	IN ENGLISH
-
-or the word ends with consonant
-
-NOMIMATIVE	PARTITIVE	IN ENGLISH
-partitive declination
-askel	askelta	(a step)
-rikas	rikasta
-ajatus	ajatusta
-Partitive is in same grade as nominative and opposite grade as genitive, thus:
-
-partitive declination
-pappi	papin	pappia
-tukk	tukan	tukkaa
-hammas	hampaan	hammasta
-*/
