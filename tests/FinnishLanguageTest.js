@@ -1,9 +1,24 @@
+
 /**
  * Test assertions for FinnishLanguage
  *
  * @author matt.pike
  */
 class FinnishLanguageTest extends TestCase {
+
+	/**
+	 * @covers FinnishLanguage.transformInfinitiveVerbToImperative
+	 */
+	static testTransformInfinitiveVerbToImperative(){
+		let assertions = [
+			['syö', 'syödä'],
+			['juo', 'juoda'],
+		];
+		assertions.forEach(assertion => {
+			let actual = FinnishLanguage.transformInfinitiveVerbToImperative(assertion[1]);
+			TestCase.assertEquals(assertion[0], actual);
+		});
+	}
 
 	/**
 	 * @covers FinnishLanguage.transformNominativeToPartitive
@@ -57,39 +72,18 @@ class FinnishLanguageTest extends TestCase {
 			['vettä', 'vesi'],
 			['vuotta', 'vuosi'],
 			['siilia', 'siili'],
-			['hiiltä', 'hiili'],
-			['lehteä', 'lehti'],
-			['kieltä', 'kieli'],
 			['uutta', 'uusi'],
 			['vettä', 'vesi'],
 			['vuotta', 'vuosi'],
 			['kuukautta', 'kuukausi'],
+			['lehteä', 'lehti'],
+			['hiiltä', 'hiili'],
+			['kieltä', 'kieli'],
 			['suurta', 'suuri'],
 			['saarta', 'saari']
 		];
 		assertions.forEach(assertion => {
-			assertEquals(assertion[0], assertion[1]);
+			TestCase.assertEquals(assertion[0], FinnishLanguage.transformNominativeToPartitive(assertion[1]));
 		});
-	}
-
-	/**
-	 * @covers FinnishLanguage.transformInfinitivetoImperative
-	 */
-	static testTransformInfinitivetoImperative(){
-		throw "Test not complete";
-	}
-}
-
-/**
- * Assert an expected value matches an actual value
- *
- * @return bool
- * @throws String
- */
-function assertEquals(expected, actual){
-	if(expected!=actual){
-		throw "ERROR: actual:"+actual+" is not equal to expected:"+expected;
-	}else{
-		return true;
 	}
 }

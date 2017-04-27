@@ -1,0 +1,50 @@
+<!doctype>
+<html>
+	<head>
+		<script type="text/javascript" src="TestCase.js"></script>
+		<script type="text/javascript" src="../src/FinnishLanguage.js"></script>
+		<script type="text/javascript" src="FinnishLanguageTest.js"></script>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<h1>Test results</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Test name</th>
+					<th>Result</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>FinnishLanguageTest.testTransformNominativeToPartitive</td>
+					<td>
+						<script type="text/javascript">
+							var errorMsg = null;
+							try{
+								FinnishLanguageTest.testTransformNominativeToPartitive();
+							}catch(assertionError){
+								errorMsg = assertionError;
+							}
+							document.write	(errorMsg ? errorMsg : "Pass");
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td>FinnishLanguageTest.transformInfinitiveVerbToImperative</td>
+					<td>
+						<script type="text/javascript">
+							var errorMsg = null;
+							try{
+								FinnishLanguageTest.testTransformInfinitiveVerbToImperative();
+							}catch(assertionError){
+								errorMsg = assertionError;
+							}
+							document.write	(errorMsg ? errorMsg : "Pass");
+						</script>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

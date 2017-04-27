@@ -1,6 +1,6 @@
 /**
 * Helper functions for working with the Finnish language.
-* 
+*
 * Disclaimer: This is a hobby project to learn a bit of Finnish and brush up on my Javascript, also
 * languages tend to have a lot of exceptions to the standard grammar rules that are hard to cover without
 * hardcoding dictionaries of words.
@@ -18,7 +18,7 @@ class FinnishLanguage {
 	*
 	* @return string[]
 	*/
-	static getVowels = function(){
+	static getVowels(){
 		return ['a','e','i','o','u','y','ä','ö','å'];
 	}
 
@@ -27,7 +27,7 @@ class FinnishLanguage {
 	*
 	* @return string[]
 	*/
-	static getConsonants = function(){
+	static getConsonants(){
 		return ['b','c','d','f','g','h','j','k','l','m','n','o','p','q','r','s','t','v','w','x','y','z'];
 	}
 
@@ -36,7 +36,7 @@ class FinnishLanguage {
 	*
 	* @return int
 	*/
-	static getVerbType = function(infinitive){
+	static getVerbType(infinitive){
 		var vowels = FinnishLanguage.getVowels();
 		var lastLetter = infinitive.substr(-1);
 		var secondToLastLetter = infinitive.substr(-2, 1);
@@ -74,7 +74,7 @@ class FinnishLanguage {
 	* @param String ref Usually the nominative form of the word which will be our guide to how we convert the string
 	* @return string
 	*/
-	static harmoniseVowels = function(lettersToHarmonise, ref){
+	static harmoniseVowels(lettersToHarmonise, ref){
 		if(ref.lastIndexOf('ä')>=0 || ref.lastIndexOf('ö')>=0 || ref.lastIndexOf('y')>=0){
 			return lettersToHarmonise.replace('a', 'ä').replace('o', 'ö');
 		}else{
@@ -88,21 +88,21 @@ class FinnishLanguage {
 	* @param string infinitive
 	* @return string
 	*/
-	static transformInfinitivetoImperative = function(infinitive){
+	static transformInfinitiveVerbToImperative(infinitive){
 		var vowels = FinnishLanguage.getVowels();
 		var lastLetter = infinitive.substr(-1);
 		var secondToLastLetter = infinitive.substr(-2, 1);
-		if(nominative.length < 3){
+		if(infinitive.length < 3){
 			return infinitive;
 		}
 		var lastLetterIsAVowel = vowels.indexOf(lastLetter) >= 0;
 		var secondToLastLetterIsAVowel = vowels.indexOf(secondToLastLetter) >= 0;
 		if(lastLetterIsAVowel && secondToLastLetterIsAVowel){
 			// Type 1 verbs e.g. istua -> istu
-			return infinitive.substr(0, -1);
+			return infinitive.substr(0, infinitive.length-1);
 		}else if(secondToLastLetter=='d' && (lastLetter=='a' || lastLetter=='ä')){
 			// Type 2 verbs e.g. syödä -> syö
-			return infinitive.substr(0, -1);
+			return infinitive.substr(0, infinitive.length-2);
 		}else{
 			throw 'TODO!';
 		}
@@ -116,7 +116,7 @@ class FinnishLanguage {
 	* @param String nominative
 	* @return String
 	*/
-	static transformNominativeToPartitive = function(nominative){
+	static transformNominativeToPartitive(nominative){
 		var vowels = FinnishLanguage.getVowels();
 		var lastLetter = nominative.substr(-1);
 		var secondToLastLetter = nominative.substr(-2, 1);
@@ -162,7 +162,7 @@ class FinnishLanguage {
 				throw 'Functionality not implemented yet.';
 			}
 		}else if(!lastLetterIsAVowel){
-			return nominative + ('ta').harmoniseVowels(lastLetter); // e.g. poikkeus -> poikkeusta
+			return nominative + FinnishLanguage.harmoniseVowels('ta', lastLetter); // e.g. poikkeus -> poikkeusta
 		}else{
 			throw "Cannot turn ''"+nominative+"'' into a partitive.";
 		}
