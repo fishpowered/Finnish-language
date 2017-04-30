@@ -9,10 +9,61 @@ class FinnishLanguageTest extends TestCase {
 	/**
 	 * @covers FinnishLanguage.transformInfinitiveVerbToImperative
 	 */
-	static testTransformInfinitiveVerbToImperative(){
+	static testTransformInfinitiveVerbToImperative_Type1(){
+		let assertions = [
+			['soi', 'soida'], // ring
+			['aja', 'ajaa'], // drive
+			['laula', 'laulaa'], // sing
+			['tanssi', 'tanssia'], // dance
+			['itke', 'itkeä'], // cry
+			['osta', 'ostaa'], // buy
+			// Consonant gradation...
+			['tiedä', 'tietää'], // know
+			['anna', 'antaa'], // give
+			['soita', 'soittaa'], // call
+			['nuku', 'nukkua'], // call
+			['opi', 'oppia'], // learn
+			['odota', 'odottaa'], // wait
+			['lue', 'lukea'], // read
+			['leivo', 'leipoa'], // bake
+			['kiellä', 'kieltää'], // forbid
+		];
+		assertions.forEach(assertion => {
+			let actual = FinnishLanguage.transformInfinitiveVerbToImperative(assertion[1]);
+			TestCase.assertEquals(assertion[0], actual);
+		});
+	}
+
+	/**
+	 * @covers FinnishLanguage.consonantGradation
+	 */
+	static testConsonantGradation(){
+		let assertions = [
+			['tiedää', 'tietää'],
+			['annaa', 'antaa'],
+			['soitaa', 'soittaa'],
+			['nukua', 'nukkua'],
+			['opia', 'oppia'],
+			['odotaa', 'odottaa'],
+			['luea', 'lukea'],
+			['leivoa', 'leipoa'],
+			['kiellää', 'kieltää'],
+			['ymmarrää', 'ymmartää'],
+		];
+		assertions.forEach(assertion => {
+			let actual = FinnishLanguage.consonantGradation(assertion[1]);
+			TestCase.assertEquals(assertion[0], actual);
+		});
+	}
+
+	/**
+	 * @covers FinnishLanguage.transformInfinitiveVerbToImperative
+	 */
+	static testTransformInfinitiveVerbToImperative_Type2(){
 		let assertions = [
 			['syö', 'syödä'],
 			['juo', 'juoda'],
+			['käy', 'käydä'],
 		];
 		assertions.forEach(assertion => {
 			let actual = FinnishLanguage.transformInfinitiveVerbToImperative(assertion[1]);

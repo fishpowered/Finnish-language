@@ -31,12 +31,40 @@
 					</td>
 				</tr>
 				<tr>
-					<td>FinnishLanguageTest.transformInfinitiveVerbToImperative</td>
+					<td>FinnishLanguageTest.consonantGradation</td>
 					<td>
 						<script type="text/javascript">
 							var errorMsg = null;
 							try{
-								FinnishLanguageTest.testTransformInfinitiveVerbToImperative();
+								FinnishLanguageTest.testConsonantGradation();
+							}catch(assertionError){
+								errorMsg = assertionError;
+							}
+							document.write	(errorMsg ? errorMsg : "Pass");
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td>FinnishLanguageTest.transformInfinitiveVerbToImperative_Type1</td>
+					<td>
+						<script type="text/javascript">
+							var errorMsg = null;
+							try{
+								FinnishLanguageTest.testTransformInfinitiveVerbToImperative_Type1();
+							}catch(assertionError){
+								errorMsg = assertionError;
+							}
+							document.write	(errorMsg ? errorMsg : "Pass");
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td>FinnishLanguageTest.transformInfinitiveVerbToImperative_Type2</td>
+					<td>
+						<script type="text/javascript">
+							var errorMsg = null;
+							try{
+								FinnishLanguageTest.testTransformInfinitiveVerbToImperative_Type2();
 							}catch(assertionError){
 								errorMsg = assertionError;
 							}

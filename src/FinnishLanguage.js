@@ -83,9 +83,40 @@ class FinnishLanguage {
 	}
 
 	/**
+	* Apply consonant gradation rules e.g.  kk -> k, t -> d etc
+	*
+	* @param string verb
+	* @return string
+	*/
+	static consonantGradation(verb){
+		let verbType = FinnishLanguage.getVerbType(verb);
+		switch(verbType){
+			case 1:
+				let kMatch = verb.search(/[a|e|i|o|u|y|ä|ö|å]k[a|e|i|o|u|y|ä|ö|å]/gi); // TODO There's probably a nice way to do verbs in regex but I have no internet and can't google it right now
+				let tMatch = verb.search(/[a|e|i|o|u|y|ä|ö|å]t[a|e|i|o|u|y|ä|ö|å]/gi);
+				let pMatch = verb.search(/[a|e|i|o|u|y|ä|ö|å]p[a|e|i|o|u|y|ä|ö|å]/gi);
+				if(pMatch >= 0){
+					// Verbs with a single p surrounded by vowels converts to v
+					return verb.substr(0, pMatch+1)+'v'+verb.substr(pMatch+2);
+				}else if(kMatch >= 0){
+					// Verbs with a single k surrounded by vowels drop the k
+					return verb.substr(0, kMatch+1)+verb.substr(kMatch+2);
+				}else if(tMatch >= 0){
+					// Verbs with a single t surrounded by vowels change to a t
+					return verb.substr(0, tMatch+1)+'d'+verb.substr(tMatch+2);
+				}else{
+					// Double consonants typically gradade to a single consonant
+					return verb.replace('kk', 'k').replace('pp', 'p').replace('tt', 't').replace('lt', 'll').replace('nt', 'nn').replace('rt', 'rr');
+				}
+			default:
+				throw "Unsupported verb type";
+		}
+	}
+
+	/**
 	* Transform a Finnish word in the infinitive form into imperative e.g. tulla -> tule
 	*
-	* @param string infinitive
+	* @param string infinitive of the verb
 	* @return string
 	*/
 	static transformInfinitiveVerbToImperative(infinitive){
@@ -99,7 +130,8 @@ class FinnishLanguage {
 		var secondToLastLetterIsAVowel = vowels.indexOf(secondToLastLetter) >= 0;
 		if(lastLetterIsAVowel && secondToLastLetterIsAVowel){
 			// Type 1 verbs e.g. istua -> istu
-			return infinitive.substr(0, infinitive.length-1);
+			var gradation = FinnishLanguage.consonantGradation(infinitive);
+			return gradation.substr(0, gradation.length-1);
 		}else if(secondToLastLetter=='d' && (lastLetter=='a' || lastLetter=='ä')){
 			// Type 2 verbs e.g. syödä -> syö
 			return infinitive.substr(0, infinitive.length-2);
